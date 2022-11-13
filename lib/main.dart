@@ -18,13 +18,14 @@ class MyApp extends StatelessWidget {
     return StateBuilder(
       observe: () => states,
       builder: (context, model) => MaterialApp(
-        initialRoute: "/",
-        routes: {
-          "/": (_) => DuaRoute(),
-          // "/another": (_) => AnotherRoute(),
-        },
-        builder: OneContext().builder,
-        navigatorKey: OneContext().key,
+        // initialRoute: "/",
+        // routes: {
+        //   "/": (_) => DuaRoute(),
+        //   // "/another": (_) => AnotherRoute(),
+        // },
+        // builder: OneContext().builder,
+        // navigatorKey: OneContext().key,
+        home: DuaRoute(),
         theme: ThemeData(
           brightness: Brightness.dark,
         ),

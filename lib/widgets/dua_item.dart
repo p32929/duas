@@ -32,7 +32,7 @@ class DuaItem extends StatelessWidget {
           ),
         ),
         Text(
-          '${duaModel.meaning} [[ ${duaModel.source} ]]',
+          '${duaModel.meaning} *** ${duaModel.source} ***',
           textDirection: TextDirection.ltr,
         ),
         Padding(
