@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bp_stbv1/models/dua_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:prefs/prefs.dart';
 
 getDuaListFromJson(String jsonStr) {
   final List t = json.decode(jsonStr);
@@ -20,6 +21,7 @@ class Apis {
     if (response.statusCode == 200) {
       // print();
       var jsonStr = await response.stream.bytesToString();
+      Prefs.setString("data", jsonStr);
       return getDuaListFromJson(jsonStr);
     } else {
       // print(response.reasonPhrase);

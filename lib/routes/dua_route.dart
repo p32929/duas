@@ -4,6 +4,7 @@ import 'package:bp_stbv1/utils/apis.dart';
 import 'package:bp_stbv1/widgets/dua_item.dart';
 import 'package:flutter/material.dart';
 import 'package:one_context/one_context.dart';
+import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class DuaRoute extends StatefulWidget {
@@ -21,8 +22,15 @@ class _DuaRouteState extends State<DuaRoute> {
   }
 
   getDuas() async {
-    List<DuaModel>? duas = await Apis.getDuas();
-    states.state.setDuas(duas!);
+    // Prefs.clear();
+    String data = Prefs.getString("data");
+    if (data == "") {
+      List<DuaModel>? duas = await Apis.getDuas();
+      states.state.setDuas(duas!);
+    } else {
+      List<DuaModel>? duas = getDuaListFromJson(data);
+      states.state.setDuas(duas!);
+    }
   }
 
   @override
