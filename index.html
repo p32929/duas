@@ -34,13 +34,21 @@
 
     <script>
       // The value below is injected by flutter build, do not touch.
-      var serviceWorkerVersion = '2021715296';
+      var serviceWorkerVersion = '2889713567';
     </script>
     <!-- This script adds the flutter initialization JS code -->
-    <script src="./duas/flutter.js" defer></script>
+    <script src="duas/flutter.js" defer></script>
   </head>
-  <body style="background-color: black">
+
+  <body>
+    <script src="duas/main.dart.js" type="application/javascript"></script>
     <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("flutter-first-frame", function () {
+          navigator.serviceWorker.register("flutter_service_worker.js");
+          navigator.serviceWorker.register("flutter_service_worker.js");
+        });
+      }
       window.addEventListener("load", function (ev) {
         // Download main.dart.js
         _flutter.loader
