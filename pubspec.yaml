@@ -39,6 +39,7 @@ dependencies:
   states_rebuilder: ^6.1.0+1
   http: ^0.13.5
   one_context: ^2.1.0
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

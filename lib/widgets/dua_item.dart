@@ -1,9 +1,10 @@
 import 'package:bp_stbv1/models/dua_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // 'Reem Kufi'
+// harmattan
+// mada
 
 class DuaItem extends StatelessWidget {
   DuaModel duaModel;
@@ -17,8 +18,10 @@ class DuaItem extends StatelessWidget {
       children: [
         Text(
           duaModel.arabic,
-          style: TextStyle(
-            fontSize: 36,
+          style: GoogleFonts.mada(
+            textStyle: TextStyle(
+              fontSize: 40,
+            ),
           ),
           textDirection: TextDirection.rtl,
         ),
@@ -40,7 +43,7 @@ class DuaItem extends StatelessWidget {
           duaModel.source,
           textDirection: TextDirection.ltr,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 12,
           ),
         ),
         Padding(
