@@ -22,6 +22,7 @@ class DuaItem extends StatelessWidget {
           style: GoogleFonts.mada(
             textStyle: TextStyle(
               fontSize: 40,
+              height: 1.6,
             ),
           ),
           textDirection: TextDirection.rtl,
