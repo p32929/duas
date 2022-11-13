@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
         },
         builder: OneContext().builder,
         navigatorKey: OneContext().key,
+        theme: ThemeData(
+          brightness: Brightness.dark,
+        ),
       ),
     );
   }
