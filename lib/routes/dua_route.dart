@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:one_context/one_context.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
-class HomeRoute extends StatefulWidget {
-  const HomeRoute({super.key});
+class DuaRoute extends StatefulWidget {
+  const DuaRoute({super.key});
 
   @override
-  State<HomeRoute> createState() => _HomeRouteState();
+  State<DuaRoute> createState() => _DuaRouteState();
 }
 
-class _HomeRouteState extends State<HomeRoute> {
+class _DuaRouteState extends State<DuaRoute> {
   @override
   void initState() {
     super.initState();

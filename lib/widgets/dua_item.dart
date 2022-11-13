@@ -7,14 +7,15 @@ import 'package:google_fonts/google_fonts.dart';
 // mada
 
 class DuaItem extends StatelessWidget {
-  DuaModel duaModel;
-  DuaItem({super.key, required this.duaModel});
+  final DuaModel duaModel;
+  const DuaItem({super.key, required this.duaModel});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           duaModel.arabic,
@@ -31,20 +32,8 @@ class DuaItem extends StatelessWidget {
           ),
         ),
         Text(
-          duaModel.meaning,
+          '${duaModel.meaning} [[ ${duaModel.source} ]]',
           textDirection: TextDirection.ltr,
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: 4,
-          ),
-        ),
-        Text(
-          duaModel.source,
-          textDirection: TextDirection.ltr,
-          style: TextStyle(
-            fontSize: 12,
-          ),
         ),
         Padding(
           padding: EdgeInsets.only(
