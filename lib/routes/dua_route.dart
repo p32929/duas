@@ -21,10 +21,10 @@ class _DuaRouteState extends State<DuaRoute> {
     getDuas();
   }
 
-  getDuas() async {
+  getDuas({bool force = false}) async {
     // Prefs.clear();
     String data = Prefs.getString("data");
-    if (data == "") {
+    if (data == "" || force) {
       List<DuaModel>? duas = await Apis.getDuas();
       states.state.setDuas(duas!);
     } else {
@@ -45,6 +45,16 @@ class _DuaRouteState extends State<DuaRoute> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                getDuas(force: true);
+              },
+              icon: Icon(
+                Icons.loop,
+              ),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
