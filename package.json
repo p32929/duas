@@ -7,7 +7,7 @@
   "license": "MIT",
   "homepage": "https://p32929.github.io/duas",
   "scripts": {
-    "predeploy": "flutter build web --base-href /duas/",
+    "predeploy": "flutter build web --web-renderer canvaskit --base-href /duas/",
     "deploy": "gh-pages -d build/web"
   },
   "devDependencies": {

@@ -51,7 +51,7 @@ class _DuaRouteState extends State<DuaRoute> {
                 getDuas(force: true);
               },
               icon: Icon(
-                Icons.rotate_90_degrees_cw,
+                Icons.rotate_right_rounded,
               ),
             ),
           ],
