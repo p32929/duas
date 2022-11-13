@@ -1,4 +1,4 @@
-# Change package name
+# Duas
 ```
-flutter pub run change_app_package_name:main com.new.package.name
+A collection of duas I try to regularly recite
 ```
