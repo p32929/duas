@@ -6,6 +6,7 @@ import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Prefs.init();
   runApp(const MyApp());
 }
