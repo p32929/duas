@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "bp_stbv1" "\0"
+            VALUE "FileDescription", "duas" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "bp_stbv1" "\0"
+            VALUE "InternalName", "duas" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "bp_stbv1.exe" "\0"
-            VALUE "ProductName", "bp_stbv1" "\0"
+            VALUE "OriginalFilename", "duas.exe" "\0"
+            VALUE "ProductName", "duas" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
