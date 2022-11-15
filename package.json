@@ -5,7 +5,6 @@
   "repository": "https://github.com/p32929/duas.git",
   "author": "p32929 <p32929@yahoo.com>",
   "license": "MIT",
-  "homepage": "https://p32929.github.io/duas",
   "scripts": {
     "predeploy": "flutter build web --web-renderer canvaskit --base-href /duas/",
     "deploy": "gh-pages -d build/web"
