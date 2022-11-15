@@ -1,9 +1,8 @@
-import 'package:bp_stbv1/models/dua_model.dart';
-import 'package:bp_stbv1/models/states.dart';
-import 'package:bp_stbv1/utils/apis.dart';
-import 'package:bp_stbv1/widgets/dua_item.dart';
+import 'package:duas/models/dua_model.dart';
+import 'package:duas/models/states.dart';
+import 'package:duas/utils/apis.dart';
+import 'package:duas/widgets/dua_item.dart';
 import 'package:flutter/material.dart';
-import 'package:one_context/one_context.dart';
 import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 

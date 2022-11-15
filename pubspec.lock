@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  back_button_interceptor:
-    dependency: transitive
-    description:
-      name: back_button_interceptor
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.1"
   bazel_worker:
     dependency: transitive
     description:
@@ -406,13 +399,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  one_context:
-    dependency: "direct main"
-    description:
-      name: one_context
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
   package_config:
     dependency: transitive
     description:

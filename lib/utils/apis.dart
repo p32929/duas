@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bp_stbv1/models/dua_model.dart';
+import 'package:duas/models/dua_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:prefs/prefs.dart';
 
