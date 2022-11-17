@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
         debugShowCheckedModeBanner: false,
+        title: "Duas",
       ),
     );
   }
