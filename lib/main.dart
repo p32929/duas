@@ -3,9 +3,11 @@ import 'package:duas/routes/dua_route.dart';
 import 'package:flutter/material.dart';
 import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await Prefs.init();
   runApp(const MyApp());
 }

@@ -6,7 +6,7 @@
   "author": "p32929 <p32929@yahoo.com>",
   "license": "MIT",
   "scripts": {
-    "predeploy": "flutter build web --web-renderer canvaskit --base-href /duas/",
+    "predeploy": "flutter build web --base-href /duas/",
     "deploy": "gh-pages -d build/web"
   },
   "devDependencies": {
