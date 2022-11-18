@@ -1,6 +1,7 @@
 import 'package:duas/models/states.dart';
 import 'package:duas/routes/dua_route.dart';
 import 'package:flutter/material.dart';
+import 'package:one_context/one_context.dart';
 import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
         //   "/": (_) => DuaRoute(),
         //   // "/another": (_) => AnotherRoute(),
         // },
-        // builder: OneContext().builder,
-        // navigatorKey: OneContext().key,
+        builder: OneContext().builder,
+        navigatorKey: OneContext().key,
         home: DuaRoute(),
         theme: ThemeData(
           brightness: Brightness.dark,
