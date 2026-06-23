@@ -1,6 +1,7 @@
 import 'package:duas/models/dua_model.dart';
+import 'package:duas/models/states.dart';
+import 'package:duas/theme/app_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DuaItem extends StatelessWidget {
   final DuaModel duaModel;
@@ -10,6 +11,7 @@ class DuaItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final s = states.state;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -23,13 +25,10 @@ class DuaItem extends StatelessWidget {
               duaModel.arabic,
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,
-              style: GoogleFonts.mada(
-                textStyle: TextStyle(
-                  fontSize: 32,
-                  height: 1.7,
-                  fontWeight: FontWeight.w500,
-                  color: colorScheme.onSurface,
-                ),
+              style: AppFonts.arabicStyle(
+                fontIndex: s.arabicFontIndex,
+                fontSize: s.arabicFontSize,
+                color: colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 20),
@@ -41,6 +40,7 @@ class DuaItem extends StatelessWidget {
               textAlign: TextAlign.center,
               style: textTheme.bodyLarge?.copyWith(
                 color: colorScheme.onSurfaceVariant,
+                fontSize: s.translationFontSize,
                 height: 1.5,
               ),
             ),
