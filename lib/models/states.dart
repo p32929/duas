@@ -1,17 +1,33 @@
 import 'package:duas/models/dua_model.dart';
+import 'package:duas/theme/app_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class States {
-  int counter = 0;
   List<DuaModel> duas = [];
 
-  increase(int num) {
-    counter += num;
+  // --- Theme preferences (persisted) ---
+  ThemeMode themeMode = ThemeMode.values[Prefs.getInt("themeMode", 0)];
+  int accentIndex =
+      Prefs.getInt("accentIndex", 0).clamp(0, kAppAccents.length - 1);
+
+  AppAccent get accent => kAppAccents[accentIndex];
+
+  void setDuas(List<DuaModel> duas) {
+    this.duas = duas;
     states.notify();
   }
 
-  setDuas(List<DuaModel> duas) {
-    this.duas = duas;
+  void setThemeMode(ThemeMode mode) {
+    themeMode = mode;
+    Prefs.setInt("themeMode", mode.index);
+    states.notify();
+  }
+
+  void setAccentIndex(int index) {
+    accentIndex = index.clamp(0, kAppAccents.length - 1);
+    Prefs.setInt("accentIndex", accentIndex);
     states.notify();
   }
 }
