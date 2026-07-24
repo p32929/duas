@@ -12,9 +12,15 @@ getDuaListFromJson(String jsonStr) {
 }
 
 class Apis {
+  /// The URL used out of the box. Users can override this from Settings.
+  static const String defaultDataUrl =
+      'https://api.npoint.io/2ac8517d3ab8e8dfea0a';
+
+  /// The URL currently in effect (user override, falling back to the default).
+  static String get dataUrl => Prefs.getString("dataUrl", defaultDataUrl);
+
   static Future<List<DuaModel>?> getDuas() async {
-    var request = http.Request(
-        'GET', Uri.parse('https://api.npoint.io/2ac8517d3ab8e8dfea0a'));
+    var request = http.Request('GET', Uri.parse(dataUrl));
 
     http.StreamedResponse response = await request.send();
 

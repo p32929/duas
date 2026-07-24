@@ -1,20 +1,24 @@
 import 'package:duas/models/states.dart';
 import 'package:duas/theme/app_fonts.dart';
 import 'package:duas/theme/app_theme.dart';
+import 'package:duas/utils/apis.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class ThemeSettingsSheet extends StatelessWidget {
-  const ThemeSettingsSheet({super.key});
+  /// Called when the data-source URL changes, so the caller can re-fetch.
+  final VoidCallback? onReload;
+
+  const ThemeSettingsSheet({super.key, this.onReload});
 
   static const String _previewArabic = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
 
-  static Future<void> show(BuildContext context) {
+  static Future<void> show(BuildContext context, {VoidCallback? onReload}) {
     return showModalBottomSheet(
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      builder: (_) => const ThemeSettingsSheet(),
+      builder: (_) => ThemeSettingsSheet(onReload: onReload),
     );
   }
 
@@ -162,12 +166,118 @@ class ThemeSettingsSheet extends StatelessWidget {
                     max: AppFonts.maxTranslationSize,
                     onChanged: s.setTranslationFontSize,
                   ),
+
+                  const Divider(height: 40),
+
+                  // ===== Data source =====
+                  _SectionLabel('Data source'),
+                  const SizedBox(height: 8),
+                  Text(
+                    'The URL your duas are loaded from. Paste your own JSON '
+                    'endpoint to use a different list.',
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  _DataSourceField(
+                    currentUrl: s.dataUrl,
+                    onReload: onReload,
+                  ),
                 ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class _DataSourceField extends StatefulWidget {
+  final String currentUrl;
+  final VoidCallback? onReload;
+
+  const _DataSourceField({required this.currentUrl, this.onReload});
+
+  @override
+  State<_DataSourceField> createState() => _DataSourceFieldState();
+}
+
+class _DataSourceFieldState extends State<_DataSourceField> {
+  late final TextEditingController _controller =
+      TextEditingController(text: widget.currentUrl);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _save() {
+    FocusScope.of(context).unfocus();
+    final changed = states.state.setDataUrl(_controller.text);
+    _controller.text = states.state.dataUrl;
+    final messenger = ScaffoldMessenger.of(context);
+    if (changed) {
+      widget.onReload?.call();
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Data source updated — reloading…')),
+      );
+    } else {
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Data source unchanged')),
+      );
+    }
+  }
+
+  void _reset() {
+    FocusScope.of(context).unfocus();
+    final changed = states.state.setDataUrl(Apis.defaultDataUrl);
+    _controller.text = states.state.dataUrl;
+    if (changed) widget.onReload?.call();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Restored the default data source')),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDefault = _controller.text.trim() == Apis.defaultDataUrl;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TextField(
+          controller: _controller,
+          keyboardType: TextInputType.url,
+          autocorrect: false,
+          textInputAction: TextInputAction.done,
+          onChanged: (_) => setState(() {}),
+          onSubmitted: (_) => _save(),
+          decoration: InputDecoration(
+            hintText: 'https://…',
+            prefixIcon: const Icon(Icons.link_rounded),
+            border: const OutlineInputBorder(),
+            isDense: true,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            TextButton.icon(
+              onPressed: isDefault ? null : _reset,
+              icon: const Icon(Icons.restart_alt_rounded, size: 18),
+              label: const Text('Default'),
+            ),
+            const Spacer(),
+            FilledButton.icon(
+              onPressed: _save,
+              icon: const Icon(Icons.save_rounded, size: 18),
+              label: const Text('Save'),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

@@ -1,12 +1,16 @@
 import 'package:duas/models/dua_model.dart';
 import 'package:duas/theme/app_fonts.dart';
 import 'package:duas/theme/app_theme.dart';
+import 'package:duas/utils/apis.dart';
 import 'package:flutter/material.dart';
 import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 class States {
   List<DuaModel> duas = [];
+
+  // --- Data source (persisted) ---
+  String dataUrl = Prefs.getString("dataUrl", Apis.defaultDataUrl);
 
   // --- Theme preferences (persisted) ---
   ThemeMode themeMode = ThemeMode.values[Prefs.getInt("themeMode", 0)];
@@ -31,6 +35,22 @@ class States {
     this.duas = duas;
     states.notify();
   }
+
+  /// Persists a new data-source URL. Falls back to the default when blank.
+  /// Clears the cached response so the next load fetches from the new URL.
+  /// Returns true if the URL actually changed.
+  bool setDataUrl(String url) {
+    final trimmed = url.trim();
+    final next = trimmed.isEmpty ? Apis.defaultDataUrl : trimmed;
+    if (next == dataUrl) return false;
+    dataUrl = next;
+    Prefs.setString("dataUrl", next);
+    Prefs.setString("data", ""); // invalidate cache
+    states.notify();
+    return true;
+  }
+
+  void resetDataUrl() => setDataUrl(Apis.defaultDataUrl);
 
   void setThemeMode(ThemeMode mode) {
     themeMode = mode;

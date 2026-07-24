@@ -101,7 +101,10 @@ class _DuaRouteState extends State<DuaRoute> {
               ),
               IconButton(
                 tooltip: 'Appearance',
-                onPressed: () => ThemeSettingsSheet.show(context),
+                onPressed: () => ThemeSettingsSheet.show(
+                  context,
+                  onReload: () => getDuas(force: true),
+                ),
                 icon: const Icon(Icons.palette_outlined),
               ),
               const SizedBox(width: 4),
