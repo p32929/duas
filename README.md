@@ -7,7 +7,9 @@ A collection of duas I try to regularly recite. This is a web application built 
 - Clean, modern interface
 - Arabic text with proper font support
 - Translations and sources
-- Dark theme for better readability
+- Light/dark theme with selectable accent colors
+- Adjustable Arabic and translation font sizes
+- **Configurable data source** — change the JSON URL from in-app Settings, no code edits required
 - Responsive design
 - Easy to customize and deploy
 
@@ -75,9 +77,11 @@ flutter run -d chrome
      2. Create a new JSON document
      3. Copy the provided URL
 
-3. Update the API endpoint:
-   - Open `lib/utils/apis.dart`
-   - Replace the URL in the `getDuas()` method with your JSON URL
+3. Point the app at your JSON — two ways:
+
+   - **From the app (recommended, no code):** open **Settings** (the palette icon in the top bar), scroll to **Data source**, paste your JSON URL, and tap **Save**. The app clears its cache and reloads from the new URL. Tap **Default** anytime to restore the built-in source. Your choice is saved on the device.
+
+   - **Change the built-in default (optional):** open `lib/utils/apis.dart` and replace `defaultDataUrl` with your JSON URL. This becomes the source used out of the box (and by the **Default** button).
 
 ## Customization
 
