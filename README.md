@@ -85,14 +85,22 @@ flutter run -d chrome
 
 ## Customization
 
-### Changing Theme
-Edit `lib/main.dart` and modify the `ThemeData` in the `MaterialApp` widget.
+Most day-to-day options are available in the app itself — open **Settings** (the palette icon in the top bar):
 
-### Changing Fonts
-Edit `lib/widgets/dua_item.dart` and modify the `GoogleFonts` widget.
+- **Theme** — Light, Dark, or System
+- **Accent color** — pick from the preset swatches
+- **Arabic font** — choose from the bundled Arabic fonts
+- **Font sizes** — adjust Arabic and translation text sizes independently
+- **Data source** — change the JSON URL the duas load from (see [Adding Your Own Duas](#adding-your-own-duas))
 
-### Updating App Title
-Edit `web/index.html` and change the `<title>` tag.
+These preferences are saved on the device.
+
+### Changing Defaults (code)
+
+- **Default theme / accent** — edit the defaults in `lib/theme/app_theme.dart`.
+- **Available fonts** — edit `lib/theme/app_fonts.dart`.
+- **Default data source** — edit `defaultDataUrl` in `lib/utils/apis.dart`.
+- **App title** — edit the `<title>` tag in `web/index.html`.
 
 ## Deployment
 
