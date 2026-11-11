@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F8A72"/>
+      <stop offset="1" stop-color="#114537"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.36" r="0.5">
+      <stop offset="0" stop-color="#FFE9B0" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FFE9B0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7DC97"/>
+      <stop offset="1" stop-color="#D9A94E"/>
+    </linearGradient>
+    <linearGradient id="pageL" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#E9E0C9"/>
+      <stop offset="0.25" stop-color="#FBF6E8"/>
+      <stop offset="1" stop-color="#FFFDF6"/>
+    </linearGradient>
+    <linearGradient id="pageR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E9E0C9"/>
+      <stop offset="0.25" stop-color="#FBF6E8"/>
+      <stop offset="1" stop-color="#FFFDF6"/>
+    </linearGradient>
+    <linearGradient id="archFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7DC97" stop-opacity="0.45"/>
+      <stop offset="0.7" stop-color="#F7DC97" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#F7DC97" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="archFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="crescent">
+      <rect width="1024" height="1024" fill="black"/>
+      <circle cx="512" cy="372" r="150" fill="white"/>
+      <circle cx="574" cy="330" r="132" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- background -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#glow)"/>
+
+  <!-- mihrab arch, very soft -->
+  <path d="M262 900 V470 A250 250 0 0 1 762 470 V900 Z" fill="url(#archFill)"/>
+  <path d="M262 900 V470 A250 250 0 0 1 762 470 V900" fill="none" stroke="url(#archFade)" stroke-width="6"/>
+
+  <!-- crescent and star -->
+  <rect width="1024" height="1024" fill="url(#gold)" mask="url(#crescent)"/>
+  <path d="M624 262 l12 30 32 2 -25 20 9 31 -28 -18 -28 18 9 -31 -25 -20 32 -2 z" fill="url(#gold)"/>
+
+  <!-- open book -->
+  <g transform="translate(0,8)">
+    <path d="M512 640 C440 600 330 596 236 620 L236 792 C330 770 440 774 512 812 Z" fill="#0B3A2E" fill-opacity="0.35" transform="translate(0,18)"/>
+    <path d="M512 640 C440 600 330 596 236 620 L236 792 C330 770 440 774 512 812 Z" fill="url(#pageL)"/>
+    <path d="M512 640 C584 600 694 596 788 620 L788 792 C694 770 584 774 512 812 Z" fill="url(#pageR)"/>
+    <!-- lines of text -->
+    <g stroke="#C9B98F" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.9">
+      <path d="M290 656 C350 644 410 646 466 664"/>
+      <path d="M290 690 C350 678 410 680 466 698"/>
+      <path d="M290 724 C350 712 410 714 466 732"/>
+      <path d="M558 664 C614 646 674 644 734 656"/>
+      <path d="M558 698 C614 680 674 678 734 690"/>
+      <path d="M558 732 C614 714 674 712 734 724"/>
+    </g>
+    <path d="M512 640 V812" stroke="#D2C49D" stroke-width="5"/>
+  </g>
+</svg>

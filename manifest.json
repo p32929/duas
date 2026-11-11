@@ -1,11 +1,11 @@
 {
-    "name": "duas",
-    "short_name": "duas",
+    "name": "Duas",
+    "short_name": "Duas",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FAF7F0",
+    "theme_color": "#1F6B57",
+    "description": "Keep the duas you recite in one calm place.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
