@@ -2,6 +2,7 @@ import 'package:duas/models/states.dart';
 import 'package:duas/theme/app_fonts.dart';
 import 'package:duas/theme/app_theme.dart';
 import 'package:duas/utils/apis.dart';
+import 'package:duas/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -42,7 +43,41 @@ class ThemeSettingsSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Settings', style: textTheme.headlineSmall),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
+
+                  // ===== Ready-made duas =====
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Show the ready-made duas'),
+                    subtitle: const Text(
+                        'The built-in collection. The duas you add yourself '
+                        'always stay.'),
+                    value: s.showReadyMade,
+                    onChanged: (v) {
+                      s.setShowReadyMade(v);
+                      if (v) onReload?.call();
+                    },
+                  ),
+                  if (s.hidden.isNotEmpty)
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          final n = s.hidden.length;
+                          s.restoreDeleted();
+                          showToast(
+                              context,
+                              n == 1
+                                  ? '1 deleted dua is back'
+                                  : '$n deleted duas are back');
+                        },
+                        icon: const Icon(Icons.restore_rounded),
+                        label:
+                            Text('Restore deleted duas (${s.hidden.length})'),
+                      ),
+                    ),
+
+                  const Divider(height: 36),
 
                   // ===== Appearance =====
                   _SectionLabel('Theme'),
@@ -66,8 +101,7 @@ class ThemeSettingsSheet extends StatelessWidget {
                       ),
                     ],
                     selected: {s.themeMode},
-                    onSelectionChanged: (sel) =>
-                        s.setThemeMode(sel.first),
+                    onSelectionChanged: (sel) => s.setThemeMode(sel.first),
                   ),
                   const SizedBox(height: 28),
 
@@ -169,20 +203,35 @@ class ThemeSettingsSheet extends StatelessWidget {
 
                   const Divider(height: 40),
 
-                  // ===== Data source =====
-                  _SectionLabel('Data source'),
-                  const SizedBox(height: 8),
-                  Text(
-                    'The URL your duas are loaded from. Paste your own JSON '
-                    'endpoint to use a different list.',
-                    style: textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
+                  const Divider(height: 36),
+
+                  // ===== Data source (advanced, folded away) =====
+                  Theme(
+                    data: Theme.of(context)
+                        .copyWith(dividerColor: Colors.transparent),
+                    child: ExpansionTile(
+                      tilePadding: EdgeInsets.zero,
+                      childrenPadding: const EdgeInsets.only(bottom: 8),
+                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                      title: Text('Advanced', style: textTheme.titleSmall),
+                      subtitle:
+                          const Text('Where the ready-made duas come from'),
+                      children: [
+                        Text(
+                          'Most people can skip this. It is the URL the '
+                          'ready-made duas are loaded from. Paste your own '
+                          'JSON endpoint to use a different list.',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        _DataSourceField(
+                          currentUrl: s.dataUrl,
+                          onReload: onReload,
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                  _DataSourceField(
-                    currentUrl: s.dataUrl,
-                    onReload: onReload,
                   ),
                 ],
               ),

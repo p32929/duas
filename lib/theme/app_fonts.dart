@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:duas/theme/font_loader.dart';
 
-/// A selectable Arabic typeface (resolved at runtime via [GoogleFonts.getFont]).
+/// A selectable Arabic typeface (downloaded on first use, see [AppFontLoader]).
 class AppArabicFont {
   /// Label shown in the UI.
   final String label;
 
-  /// Google Fonts family name (must match the family in the google_fonts pkg).
+  /// Google Fonts family name (must be a key of kFontFiles).
   final String family;
 
   const AppArabicFont(this.label, this.family);
@@ -43,14 +43,13 @@ class AppFonts {
     Color? color,
   }) {
     final font = kArabicFonts[fontIndex.clamp(0, kArabicFonts.length - 1)];
-    return GoogleFonts.getFont(
-      font.family,
-      textStyle: TextStyle(
-        fontSize: fontSize,
-        height: 1.7,
-        fontWeight: FontWeight.w500,
-        color: color,
-      ),
+    AppFontLoader.load(font.family); // no-op once loaded
+    return TextStyle(
+      fontFamily: font.family,
+      fontSize: fontSize,
+      height: 1.7,
+      fontWeight: FontWeight.w500,
+      color: color,
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// A single selectable Material You accent option.
 class AppAccent {
@@ -24,9 +23,20 @@ const List<AppAccent> kAppAccents = [
 
 class AppTheme {
   static ThemeData _build(Color seed, Brightness brightness) {
+    final dark = brightness == Brightness.dark;
+    // A quiet, paper-like background: warm in light mode, deep ink in dark,
+    // with just a breath of the accent colour.
+    final paper = Color.alphaBlend(
+      seed.withValues(alpha: dark ? 0.06 : 0.04),
+      dark ? const Color(0xFF0E1311) : const Color(0xFFFAF7F0),
+    );
     final colorScheme = ColorScheme.fromSeed(
       seedColor: seed,
       brightness: brightness,
+    ).copyWith(
+      surface: paper,
+      surfaceContainerLowest:
+          dark ? const Color(0xFF151B18) : const Color(0xFFFFFFFF),
     );
 
     final baseTextTheme = brightness == Brightness.dark
@@ -37,14 +47,35 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: colorScheme.surface,
-      textTheme: GoogleFonts.interTextTheme(baseTextTheme),
+      fontFamily: 'Inter',
+      textTheme: baseTextTheme.apply(fontFamily: 'Inter'),
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
-        surfaceTintColor: colorScheme.surfaceTint,
         elevation: 0,
-        scrolledUnderElevation: 3,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
         centerTitle: false,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        elevation: 2,
+        highlightElevation: 3,
+        extendedPadding: const EdgeInsets.symmetric(horizontal: 22),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      ),
+      chipTheme: ChipThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        side: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(0, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 22),
+        ),
       ),
       cardTheme: CardThemeData(
         clipBehavior: Clip.antiAlias,

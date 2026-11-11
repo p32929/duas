@@ -2,15 +2,18 @@ import 'package:duas/models/states.dart';
 import 'package:duas/routes/dua_route.dart';
 import 'package:duas/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:one_context/one_context.dart';
 import 'package:prefs/prefs.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:duas/theme/font_loader.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
+  usePathUrlStrategy();
   await Prefs.init();
+  // the fonts arrive in the background; text shows in the system font first
+  AppFontLoader.load('Inter');
+  AppFontLoader.load('Newsreader');
   runApp(const MyApp());
 }
 
@@ -24,8 +27,6 @@ class MyApp extends StatelessWidget {
       builder: (context, model) {
         final seed = states.state.accent.seed;
         return MaterialApp(
-          builder: OneContext().builder,
-          navigatorKey: OneContext().key,
           home: DuaRoute(),
           theme: AppTheme.light(seed),
           darkTheme: AppTheme.dark(seed),
