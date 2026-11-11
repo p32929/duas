@@ -171,7 +171,9 @@ jobs:
       - run: flutter build web --release --base-href /duas/
       - run: |
           mkdir -p dist
-          (cd build/web && zip -qr "../../dist/Duas-v${{ needs.version.outputs.version }}-web.zip" .)
+          # The app loads its renderer (canvaskit, 36 MB) from Google's servers,
+          # so the local copy is left out of the download.
+          (cd build/web && zip -qr "../../dist/Duas-v${{ needs.version.outputs.version }}-web.zip" . -x 'canvaskit/*')
       - uses: actions/upload-artifact@v4
         with:
           name: web
@@ -209,4 +211,4 @@ jobs:
             | macOS | `Duas-v${{ needs.version.outputs.version }}-macos.zip` | Unzip and move Duas to Applications. The app is not signed: the first time, right-click it and choose Open. |
             | Linux | `Duas-v${{ needs.version.outputs.version }}-linux-x64.tar.gz` | Extract, then run `./duas`. Needs GTK 3. |
             | iPhone / iPad | `Duas-v${{ needs.version.outputs.version }}-ios-unsigned.ipa` | Not signed. Install with a sideloading tool such as AltStore or Sideloadly. |
-            | Web | `Duas-v${{ needs.version.outputs.version }}-web.zip` | Upload the files to any static web host. |
+            | Web | `Duas-v${{ needs.version.outputs.version }}-web.zip` | Upload the files to any static web host. Needs internet: the renderer loads from Google. |
