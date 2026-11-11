@@ -221,10 +221,11 @@ class _TranslateSheetState extends State<TranslateSheet> {
                 box(
                   '$_language · translated by AI (Qwen)',
                   _busy
-                      ? const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 12),
+                      // not const: newer Flutter versions refuse a const Row here
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
                           child: Row(
-                            children: [
+                            children: const [
                               SizedBox(
                                   width: 18,
                                   height: 18,
